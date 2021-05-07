@@ -5,29 +5,27 @@ import 'package:timer_count_down/timer_count_down.dart';
 import 'result.dart';
 import 'dart:math';
 
-class Game extends StatefulWidget {
+class Game1 extends StatefulWidget {
 
   @override
   _GamePageState createState() => _GamePageState();
 }
 
-class _GamePageState extends State<Game> {
+class _GamePageState extends State<Game1> {
 
   final CountdownController _controller = CountdownController();
   int pageCount= 1;
   dynamic nationFlag = ["images/kr.png", "images/jp.png", "images/cn.png", "images/br.png", "images/us.png",
                         "images/se.png", "images/fr.png", "images/de.png", "images/id.png", "images/in.png"
                         ];
-  List<String> nationName = ["대한민국", "일본", "중국", "브라질", "미국",
-                              "스웨덴", "프랑스", "독일", "인도네시아", "인도"];
+  List<String> nationName = [
+    "대한민국", "일본", "중국", "브라질", "미국",
+    "스웨덴", "프랑스", "독일", "인도네시아", "인도",
+    "필리핀", "사우디아라아" //배열의 에러방지를 위해 두 국가 미리넣어해둠
+  ];
 
   int randomDeploy = Random().nextInt(3);
-  int randomNumber1 = Random().nextInt(10);
-  int randomNumber2 = Random().nextInt(10);
-
   int score = 0;
-
-  bool _isSame = false;
 
 
   void nextQuiz(){
@@ -42,30 +40,8 @@ class _GamePageState extends State<Game> {
       pageCount += 1;
       _controller.restart();
 
-      /*while(true){
-        if(randomNumber1 == pageCount ){
-
-          randomNumber1 = Random().nextInt(10);
-          if(randomNumber1 != pageCount){
-            break;
-          }
-        }
-
-      }
-      while(true){
-        if(randomNumber2 == pageCount ){
-
-          randomNumber1 = Random().nextInt(10);
-          if(randomNumber2 != pageCount){
-            break;
-          }
-        }
-
-      }*/
-
       randomDeploy = Random().nextInt(3);
-      randomNumber1 = Random().nextInt(10);
-      randomNumber2= Random().nextInt(10);
+
 
     });
 
@@ -106,8 +82,7 @@ class _GamePageState extends State<Game> {
               pageCount += 1;
               _controller.restart();
               randomDeploy = Random().nextInt(3);
-              randomNumber1 = Random().nextInt(10);
-              randomNumber2= Random().nextInt(10);
+
             });
           },
         ),
@@ -138,13 +113,13 @@ class _GamePageState extends State<Game> {
 
                         nextQuiz();
                   },
-                      child: Text("${nationName[randomNumber1]}",style: TextStyle(fontSize: 50))
+                      child: Text("${nationName[pageCount]}",style: TextStyle(fontSize: 50))
                   ),
                       SizedBox(height:40),
                       ElevatedButton(onPressed: (){
 
                     nextQuiz();
-                  }, child: Text("${nationName[randomNumber2]}",style: TextStyle(fontSize: 50)))
+                  }, child: Text("${nationName[pageCount+1]}",style: TextStyle(fontSize: 50)))
                 ])):
 
                 randomDeploy==1?
@@ -153,14 +128,14 @@ class _GamePageState extends State<Game> {
 
                     nextQuiz();
 
-                  }, child: Text("${nationName[randomNumber1]}",style: TextStyle(fontSize: 50))),SizedBox(height:40),
+                  }, child: Text("${nationName[pageCount]}",style: TextStyle(fontSize: 50))),SizedBox(height:40),
                   ElevatedButton(onPressed: (){
                     nextQuiz();
                     score += 10;
                   }, child: Text("${nationName[pageCount-1]}",style: TextStyle(fontSize: 50))),SizedBox(height:40),
                   ElevatedButton(onPressed: (){
                     nextQuiz();
-                  }, child: Text("${nationName[randomNumber2]}",style: TextStyle(fontSize: 50)))
+                  }, child: Text("${nationName[pageCount+1]}",style: TextStyle(fontSize: 50)))
                 ])):
 
                     randomDeploy==2?
@@ -168,11 +143,11 @@ class _GamePageState extends State<Game> {
                       ElevatedButton(onPressed: (){
 
                         nextQuiz();
-                      }, child: Text("${nationName[randomNumber1]}",style: TextStyle(fontSize: 50))),SizedBox(height:40),
+                      }, child: Text("${nationName[pageCount]}",style: TextStyle(fontSize: 50))),SizedBox(height:40),
                       ElevatedButton(onPressed: (){
 
                         nextQuiz();
-                      }, child: Text("${nationName[randomNumber2]}",style: TextStyle(fontSize: 50))),SizedBox(height:40),
+                      }, child: Text("${nationName[pageCount+1]}",style: TextStyle(fontSize: 50))),SizedBox(height:40),
                       ElevatedButton(onPressed: (){
                         nextQuiz();
                         score += 10;
